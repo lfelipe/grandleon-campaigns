@@ -24,11 +24,11 @@
     "title": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 240
+      "maxLength": 160
     },
     "campaigns": {
       "type": "array",
-      "maxItems": 200,
+      "maxItems": 128,
       "items": {
         "type": "object",
         "required": [
@@ -47,30 +47,30 @@
         "properties": {
           "id": {
             "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9._-]{0,95}$"
+            "pattern": "^[a-z0-9][a-z0-9_-]{0,63}$"
           },
           "title": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 240
+            "maxLength": 160
           },
           "description": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 2000
+            "maxLength": 2048
           },
           "author": {
             "type": "string",
             "minLength": 1,
-            "maxLength": 240
+            "maxLength": 160
           },
           "version": {
             "type": "string",
-            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+            "pattern": "^(0|[1-9][0-9]{0,5})\\.(0|[1-9][0-9]{0,5})\\.(0|[1-9][0-9]{0,5})$"
           },
           "campaign": {
             "type": "string",
-            "pattern": "^[a-z][a-z0-9_]{0,95}$"
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
           },
           "playerMode": {
             "enum": [
@@ -82,17 +82,18 @@
           "languages": {
             "type": "array",
             "minItems": 1,
-            "maxItems": 64,
+            "maxItems": 16,
             "uniqueItems": true,
             "items": {
               "type": "string",
               "minLength": 2,
-              "maxLength": 32
+              "maxLength": 32,
+              "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$"
             }
           },
           "minimumPlayerVersion": {
             "type": "string",
-            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+            "pattern": "^(0|[1-9][0-9]{0,5})\\.(0|[1-9][0-9]{0,5})\\.(0|[1-9][0-9]{0,5})$"
           },
           "assets": {
             "type": "object",

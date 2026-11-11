@@ -54,6 +54,25 @@ class CatalogTests(unittest.TestCase):
         self.catalog['formatVersion'] = 2
         self.assertTrue(validator.validate(self.catalog))
 
+    def test_canonical_player_modes(self):
+        for mode in ['one', 'two', 'choice']:
+            self.catalog['campaigns'][0]['playerMode'] = mode
+            self.assertEqual(validator.validate(self.catalog), [])
+        for mode in ['solo', 'coop']:
+            self.catalog['campaigns'][0]['playerMode'] = mode
+            self.assertTrue(validator.validate(self.catalog))
+
+    def test_player_supported_bounds(self):
+        entry = self.catalog['campaigns'][0]
+        entry['id'] = 'x' * 65
+        self.assertTrue(validator.validate(self.catalog))
+        entry['id'] = 'valid'
+        entry['version'] = '01.0.0'
+        self.assertTrue(validator.validate(self.catalog))
+        entry['version'] = '1.0.0'
+        entry['title'] = 'x' * 161
+        self.assertTrue(validator.validate(self.catalog))
+
     def test_future_asset_kinds_are_representable(self):
         self.catalog['campaigns'][0]['assets'] = {'kind': 'bundle', 'manifestUrl': 'https://example.invalid/assets.json'}
         self.assertEqual(validator.validate(self.catalog), [])
