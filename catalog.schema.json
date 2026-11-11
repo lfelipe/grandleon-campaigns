@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/lfelipe/grandleon-campaigns/main/catalog.schema.json",
+  "title": "Grandleon campaign catalogue v1",
+  "type": "object",
+  "required": [
+    "format",
+    "formatVersion",
+    "id",
+    "title",
+    "campaigns"
+  ],
+  "properties": {
+    "format": {
+      "const": "grandleon-campaign-catalog"
+    },
+    "formatVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,95}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240
+    },
+    "campaigns": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "description",
+          "author",
+          "version",
+          "campaign",
+          "playerMode",
+          "languages",
+          "minimumPlayerVersion",
+          "assets",
+          "package"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]{0,95}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "author": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 240
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          "campaign": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]{0,95}$"
+          },
+          "playerMode": {
+            "enum": [
+              "one",
+              "two",
+              "choice"
+            ]
+          },
+          "languages": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 64,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 32
+            }
+          },
+          "minimumPlayerVersion": {
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          "assets": {
+            "type": "object",
+            "required": [
+              "kind"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 40
+              },
+              "pack": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 240
+              },
+              "version": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "builtin"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "pack",
+                    "version"
+                  ]
+                }
+              }
+            ]
+          },
+          "thumbnailUrl": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "maxLength": 2048
+          },
+          "package": {
+            "type": "object",
+            "required": [
+              "url",
+              "sizeBytes",
+              "sha256"
+            ],
+            "properties": {
+              "url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://",
+                "maxLength": 2048
+              },
+              "sizeBytes": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 16777216
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
