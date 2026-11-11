@@ -3,5 +3,31 @@
   "formatVersion": 1,
   "id": "grandleon.official",
   "title": "Grandleon Campaigns",
-  "campaigns": []
+  "campaigns": [
+    {
+      "id": "steel-and-cedar",
+      "title": "Steel and Cedar",
+      "description": "Five battles with distinct solo and local co-op setups, reinforcements, varied terrain and a hidden castle interior. A feature and translation showcase.",
+      "author": "Grandleon contributors",
+      "version": "0.5.0",
+      "campaign": "steel_and_cedar",
+      "playerMode": "choice",
+      "languages": [
+        "en",
+        "es",
+        "pt-BR"
+      ],
+      "minimumPlayerVersion": "0.5.0",
+      "assets": {
+        "kind": "builtin",
+        "pack": "grandleon-core",
+        "version": 1
+      },
+      "package": {
+        "url": "https://github.com/lfelipe/grandleon-campaigns/releases/download/steel-and-cedar-0.5.0/steel-and-cedar-0.5.0.gpk",
+        "sizeBytes": 55584,
+        "sha256": "2c798979b547e6dd94c6ea6fd8710ae04f06871bb607e913b6cab0e158d9fd1a"
+      }
+    }
+  ]
 }
